@@ -1,13 +1,15 @@
-FROM centos:7
-MAINTAINER shikhardevops@gmail.com
-RUN yum install -y httpd \
- zip\
- unzip
-COPY photogenic.zip /var/www/html
-WORKDIR /var/www/html/
-RUN unzip photogenic.zip
-RUN cp -rvf photogenic/* .
-RUN rm -rf photogenic photogenic.zip
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+# Use a lightweight base image
+FROM alpine:latest
+
+# Install a basic HTTP server
+RUN apk add --no-cache busybox-extras
+
+# Copy a sample HTML file
+COPY index.html /var/www/localhost/htdocs/
+
+# Expose port 80
 EXPOSE 80
+
+# Start the HTTP server
+CMD ["httpd", "-f", "-v", "-p", "80"]
 
