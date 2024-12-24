@@ -5,7 +5,7 @@ FROM alpine:latest
 RUN apk add --no-cache busybox-extras
 
 # Copy a sample HTML file
-COPY /home/devops/index.html /var/www/localhost/htdocs/
+COPY index.html /var/www/localhost/htdocs/
 
 # Expose port 80
 EXPOSE 80
